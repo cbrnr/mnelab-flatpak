@@ -1,0 +1,249 @@
+id: io.github.mnelab.MNELAB
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+command: mnelab
+finish-args:
+  - --device=dri
+  - --device=input
+  - --filesystem=home
+  - --filesystem=host-os
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+# cleanup:
+  # - TODO!!
+
+modules:
+  - name: python-numpy
+    buildsystem: simple
+    only-arches:
+      - x86_64
+    build-commands:
+      - pip install --verbose --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} --no-build-isolation numpy
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/ef/27/39622993e8688a1f05898a3c3b2836b856f79c06637ebd4b71cb35cc9b18/numpy-2.0.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+        sha256: 15eb4eca47d36ec3f78cde0a3a2ee24cf05ca7396ef808dda2c0ddad7c2bde67
+
+  - name: python-scipy
+    buildsystem: simple
+    only-arches:
+      - x86_64
+    build-commands:
+      - pip install --verbose --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} --no-build-isolation scipy
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/89/bb/80c9c98d887c855710fd31fc5ae5574133e98203b3475b07579251803662/scipy-1.14.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+        sha256: 9e3154691b9f7ed73778d746da2df67a19d046a6c8087c8b385bc4cdb2cfca74
+
+  - name: python-matplotlib
+    buildsystem: simple
+    only-arches:
+      - x86_64
+    build-commands:
+      - pip install --verbose --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} --no-build-isolation matplotlib
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/01/75/6c7ce560e95714a10fcbb3367d1304975a1a3e620f72af28921b796403f3/matplotlib-3.9.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+        sha256: 8912ef7c2362f7193b5819d17dae8629b34a95c58603d781329712ada83f9447
+      - type: file
+        url: https://files.pythonhosted.org/packages/ee/c0/9bd123d676eb61750e116a2cd915b06483fc406143cfc36c7f263f0f5368/contourpy-1.2.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+        sha256: d4492d82b3bc7fbb7e3610747b159869468079fe149ec5c4d771fa1f614a14df
+      - type: file
+        url: https://files.pythonhosted.org/packages/e7/05/c19819d5e3d95294a6f5947fb9b9629efb316b96de511b418c53d245aae6/cycler-0.12.1-py3-none-any.whl
+        sha256: 85cef7cff222d8644161529808465972e51340599459b8ac3ccbac5a854e0d30        
+      - type: file
+        url: https://files.pythonhosted.org/packages/a4/22/0a0ad59d9367997fd74a00ad2e88d10559122e09f105e94d34c155aecc0a/fonttools-4.53.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+        sha256: bee32ea8765e859670c4447b0817514ca79054463b6b79784b08a8df3a4d78e3
+      - type: file
+        url: https://files.pythonhosted.org/packages/17/ba/17a706b232308e65f57deeccae503c268292e6a091313f6ce833a23093ea/kiwisolver-1.4.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+        sha256: 040c1aebeda72197ef477a906782b5ab0d387642e93bda547336b8957c61022e
+      - type: file
+        url: https://files.pythonhosted.org/packages/08/aa/cc0199a5f0ad350994d660967a8efb233fe0416e4639146c089643407ce6/packaging-24.1-py3-none-any.whl
+        sha256: 5b8f2217dbdbd2f7f384c41c628544e6d52f2d0f53c6d0c3ea61aa5d1d7ff124
+      - type: file
+        url: https://files.pythonhosted.org/packages/ba/e5/8c68ff608a4203085158cff5cc2a3c534ec384536d9438c405ed6370d080/pillow-10.4.0-cp311-cp311-manylinux_2_28_x86_64.whl
+        sha256: 76a911dfe51a36041f2e756b00f96ed84677cdeb75d25c767f296c1c1eda1319
+      - type: file
+        url: https://files.pythonhosted.org/packages/9d/ea/6d76df31432a0e6fdf81681a895f009a4bb47b3c39036db3e1b528191d52/pyparsing-3.1.2-py3-none-any.whl
+        sha256: f9db75911801ed778fe61bb643079ff86601aca99fcae6345aa67292038fb742
+      - type: file
+        url: https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl
+        sha256: a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427
+
+  - name: python-mne
+    buildsystem: simple
+    only-arches:
+      - x86_64
+    build-commands:
+      - pip install --verbose --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} --no-build-isolation mne
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/08/eb/22fc25d35fa8a3399fb687f37663acac5e71c5b9f224c17794cb1f82561d/mne-1.7.1-py3-none-any.whl
+        sha256: 90f18eb8000f33701ebdc64766a70c644be2745be76ae6b66d7d14dd44fe83f3
+      - type: file
+        url: https://files.pythonhosted.org/packages/d5/50/83c593b07763e1161326b3b8c6686f0f4b0f24d5526546bee538c89837d6/decorator-5.1.1-py3-none-any.whl
+        sha256: b8c3f85900b9dc423225913c5aace94729fe1fa9763b38939a95226f02d37186
+      - type: file
+        url: https://files.pythonhosted.org/packages/31/80/3a54838c3fb461f6fec263ebf3a3a41771bd05190238de3486aae8540c36/jinja2-3.1.4-py3-none-any.whl
+        sha256: bc5dd2abb727a5319567b7a813e6a2e7318c39f4f487cfe6c89c6f9c7d25197d
+      - type: file
+        url: https://files.pythonhosted.org/packages/83/60/d497a310bde3f01cb805196ac61b7ad6dc5dcf8dce66634dc34364b20b4f/lazy_loader-0.4-py3-none-any.whl
+        sha256: 342aa8e14d543a154047afb4ba8ef17f5563baad3fc610d7b15b213b0f119efc
+      - type: file
+        url: https://files.pythonhosted.org/packages/a8/87/77cc11c7a9ea9fd05503def69e3d18605852cd0d4b0d3b8f15bbeb3ef1d1/pooch-1.8.2-py3-none-any.whl
+        sha256: 3529a57096f7198778a5ceefd5ac3ef0e4d06a6ddaf9fc2d609b806f25302c47
+      - type: file
+        url: https://files.pythonhosted.org/packages/48/5d/acf5905c36149bbaec41ccf7f2b68814647347b72075ac0b1fe3022fdc73/tqdm-4.66.5-py3-none-any.whl
+        sha256: 90279a3770753eafc9194a0364852159802111925aa30eb3f9d85b0e805ac7cd
+      - type: file
+        url: https://files.pythonhosted.org/packages/68/13/2aa1f0e1364feb2c9ef45302f387ac0bd81484e9c9a4c5688a322fbdfd08/platformdirs-4.2.2-py3-none-any.whl
+        sha256: 2d7a1657e36a80ea911db832a8a6ece5ee53d8de21edd5cc5879af6530b1bfee
+      - type: file
+        url: https://files.pythonhosted.org/packages/f9/9b/335f9764261e915ed497fcdeb11df5dfd6f7bf257d4a6a2a686d80da4d54/requests-2.32.3-py3-none-any.whl
+        sha256: 70761cfe03c773ceb22aa2f671b4757976145175cdfca038c02654d061d6dcc6
+      - type: file
+        url: https://files.pythonhosted.org/packages/40/26/f35951c45070edc957ba40a5b1db3cf60a9dbb1b350c2d5bef03e01e61de/charset_normalizer-3.3.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+        sha256: 753f10e867343b4511128c6ed8c82f7bec3bd026875576dfd88483c5c73b2fd8
+      - type: file
+        url: https://files.pythonhosted.org/packages/e5/3e/741d8c82801c347547f8a2a06aa57dbb1992be9e948df2ea0eda2c8b79e8/idna-3.7-py3-none-any.whl
+        sha256: 82fee1fc78add43492d3a1898bfa6d8a904cc97d8427f683ed8e798d07761aa0
+      - type: file
+        url: https://files.pythonhosted.org/packages/ca/1c/89ffc63a9605b583d5df2be791a27bc1a42b7c32bab68d3c8f2f73a98cd4/urllib3-2.2.2-py3-none-any.whl
+        sha256: a448b2f64d686155468037e1ace9f2d2199776e17f0a46610480d311f73e3472
+      - type: file
+        url: https://files.pythonhosted.org/packages/1c/d5/c84e1a17bf61d4df64ca866a1c9a913874b4e9bdc131ec689a0ad013fb36/certifi-2024.7.4-py3-none-any.whl
+        sha256: c198e21b1289c2ab85ee4e67bb4b4ef3ead0892059901a8d5b622f24a1101e90
+  
+  - name: python-pybv
+    buildsystem: simple
+    only-arches:
+      - x86_64
+    build-commands:
+      - pip install --verbose --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} --no-build-isolation pybv
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/ff/0a/533702d81e02f351b9dbc3679a48035c1a9de4aae48ef7f4b4e7e4102fed/pybv-0.7.5-py2.py3-none-any.whl
+        sha256: 02b7a7b478d8b2cf722f523a557f7e8aa9a2280193e917a0aa5a545807c1aa7f
+
+  - name: python-edfio
+    buildsystem: simple
+    only-arches:
+      - x86_64
+    build-commands:
+      - pip install --verbose --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} --no-build-isolation edfio
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/32/0f/5c9454044b9f4dc5f2fea77ce0cbe37514f0bcdfdcf5367f6dd90899dcf9/edfio-0.4.3-py3-none-any.whl
+        sha256: f52f58518656fa365bb3be201b828e8b09d3652e79a2f80d6057320cebcde730
+
+  - name: python-pyxdf
+    buildsystem: simple
+    only-arches:
+      - x86_64
+    build-commands:
+      - pip install --verbose --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} --no-build-isolation pyxdf
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/c3/22/4aa399b40a10a77e2594b8bf3063443a92b25d4c8bcc00303a49405c3188/pyxdf-1.16.8-py2.py3-none-any.whl
+        sha256: 8745e4b41aae974d7327cd35ebeeed84cc010991200078ef3dead20e1e79bf2d
+  
+  - name: python-scikit-learn
+    buildsystem: simple
+    only-arches:
+      - x86_64
+    build-commands:
+      - pip install --verbose --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} --no-build-isolation scikit-learn
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/32/63/ed228892adad313aab0d0f9261241e7bf1efe36730a2788ad424bcad00ca/scikit_learn-1.5.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+        sha256: 689b6f74b2c880276e365fe84fe4f1befd6a774f016339c65655eaff12e10cbf
+      - type: file
+        url: https://files.pythonhosted.org/packages/91/29/df4b9b42f2be0b623cbd5e2140cafcaa2bef0759a00b7b70104dcfe2fb51/joblib-1.4.2-py3-none-any.whl
+        sha256: 06d478d5674cbc267e7496a410ee875abd68e4340feff4490bcb7afb88060ae6
+      - type: file
+        url: https://files.pythonhosted.org/packages/4b/2c/ffbf7a134b9ab11a67b0cf0726453cedd9c5043a4fe7a35d1cefa9a1bcfb/threadpoolctl-3.5.0-py3-none-any.whl
+        sha256: 56c1e26c150397e58c4926da8eeee87533b1e32bef131bd4bf6a2f45f3185467
+
+  - name: python-picard
+    buildsystem: simple
+    only-arches:
+      - x86_64
+    build-commands:
+      - pip install --verbose --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} --no-build-isolation python-picard
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/5f/eb/9de3b1ad3712700abb702b6ea6590caeeab1bc3bda08d31785121bde159f/python_picard-0.7-py3-none-any.whl
+        sha256: 52643e2d644d9317559da3f3a26eb3661bbd813dd7a7061d39f7084618c8c938
+      - type: file
+        url: https://files.pythonhosted.org/packages/2f/b3/55ac60a4003fcc6013ef87a3c97fd7811c5662cb1c19ea438c03601c3d8f/numexpr-2.10.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
+        sha256: 45f598182b4f5c153222e47d5163c3bee8d5ebcaee7e56dd2a5898d4d97e4473
+  
+  - name: python-psutil
+    buildsystem: simple
+    only-arches:
+      - x86_64
+    build-commands:
+      - pip install --verbose --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} --no-build-isolation psutil
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/19/74/f59e7e0d392bc1070e9a70e2f9190d652487ac115bb16e2eff6b22ad1d24/psutil-6.0.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+        sha256: 5fd9a97c8e94059b0ef54a7d4baf13b405011176c3b6ff257c247cae0d560ecd
+
+  - name: python-pyside6
+    buildsystem: simple
+    only-arches:
+      - x86_64
+    build-commands:
+      - pip install --verbose --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} --no-build-isolation pyside6
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/14/60/dc79d4ea59ed1ebe6062c5db972b31d489ea84315dcf3bd58a2a741c73b3/PySide6-6.6.3.1-cp38-abi3-manylinux_2_28_x86_64.whl
+        sha256: 35936f06257e5c37ae8993da0cb5a528e5db3ea1fc2bb6b12cdf899a11510966
+      - type: file
+        url: https://files.pythonhosted.org/packages/4a/29/2375cccf188862c3297f40cb06832cd48fd98fd5da73b0b296a59f54c9f4/PySide6_Essentials-6.6.3.1-cp38-abi3-manylinux_2_28_x86_64.whl
+        sha256: 1f41f357ce2384576581e76c9c3df1c4fa5b38e347f0bcd0cae7c5bce42a917c
+      - type: file
+        url: https://files.pythonhosted.org/packages/02/fc/e265aa0c338ddd8a4f2c3526aadc58f60980508ac56999ba79cf2ce744a7/PySide6_Addons-6.6.3.1-cp38-abi3-manylinux_2_28_x86_64.whl
+        sha256: 7373479565e5bd963b9662857c40c20768bc0b5853334e2076a62cb039e91f74
+      - type: file
+        url: https://files.pythonhosted.org/packages/77/f1/feb2a8be699f91fb27fbe8758b405fb38a22e3ae5bd5e05258dbef18d462/shiboken6-6.6.3.1-cp38-abi3-manylinux_2_28_x86_64.whl
+        sha256: b1aeff0d79d84ddbdc9970144c1bbc3a52fcb45618d1b33d17d57f99f1246d45
+  
+  - name: python-mne-qt-browser
+    buildsystem: simple
+    only-arches:
+      - x86_64
+    build-commands:
+      - pip install --verbose --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} --no-build-isolation mne-qt-browser
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/fb/4e/3535911f725155f5511e430cb26f15773213f2018404bac6c33e4cb29948/mne_qt_browser-0.6.3-py3-none-any.whl
+        sha256: b865ae2d36344e33d9b10fb14074b322d9e762131f46a7b6e2a389c713069e83
+      - type: file
+        url: https://files.pythonhosted.org/packages/f2/f2/728f041460f1b9739b85ee23b45fa5a505962ea11fd85bdbe2a02b021373/darkdetect-0.8.0-py3-none-any.whl
+        sha256: a7509ccf517eaad92b31c214f593dbcf138ea8a43b2935406bbd565e15527a85
+      - type: file
+        url: https://files.pythonhosted.org/packages/7b/34/5702b3b7cafe99be1d94b42f100e8cc5e6957b761fcb1cf5f72d492851da/pyqtgraph-0.13.7-py3-none-any.whl
+        sha256: 7754edbefb6c367fa0dfb176e2d0610da3ada20aa7a5318516c74af5fb72bf7a
+      - type: file
+        url: https://files.pythonhosted.org/packages/93/7d/c3c10498430dadcea4def5faddf71cd199e577d20a125e7ef1e9d7bdbbfa/QDarkStyle-3.2.3-py2.py3-none-any.whl
+        sha256: ea980ee426d594909cf1058306832af71ff6cbad6f69237b036d1550635aefbc
+      - type: file
+        url: https://files.pythonhosted.org/packages/7e/a9/2146d5117ad8a81185331e0809a6b48933c10171f5bac253c6df9fce991c/QtPy-2.4.1-py3-none-any.whl
+        sha256: 1c1d8c4fa2c884ae742b069151b0abe15b3f70491f3972698c683b8e38de839b
+      - type: file
+        url: https://files.pythonhosted.org/packages/2f/4b/ea1c1c4ecaa97baf8001568d502eaff1bbc3d5c1b48cce3f3fd5a77b8f52/scooby-0.10.0-py3-none-any.whl
+        sha256: 0a3d7e304f8ebb16f69ff7f6360c345d7f50b45f2ddbf7c3d18a6a0dc2cb03a6
+
+  - name: python-mnelab
+    buildsystem: simple
+    only-arches:
+      - x86_64
+    build-commands:
+      - pip install --verbose --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} --no-build-isolation mnelab
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/fb/93/9cd50ce72aa2bc1adc01ef347ed2958816b5f2218aae3179fe117c29f1ef/mnelab-0.9.1-py3-none-any.whl
+        sha256: 63bb265061f68b458e3bb6f47142ac2b2524df35db85c10de376d6879edb6901
