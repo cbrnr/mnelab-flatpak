@@ -5,9 +5,7 @@ sdk: org.freedesktop.Sdk
 command: mnelab
 finish-args:
   - --device=dri
-  - --device=input
   - --filesystem=home
-  - --filesystem=host-os
   - --share=ipc
   - --socket=wayland
   - --socket=fallback-x11
